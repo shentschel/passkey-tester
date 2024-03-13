@@ -8,8 +8,8 @@ export type ConfigState = {
 };
 
 const initialState: ConfigState = {
-  adminUrl: 'http://localhost:8001',
-  publicUrl: 'http://localhost:8000',
+  adminUrl: 'http://10.0.2.2:8001',
+  publicUrl: 'http://10.0.2.2:8000',
 };
 
 export const ConfigSlice = createSlice({

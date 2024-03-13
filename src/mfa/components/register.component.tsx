@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { hasNew } from '../../credentials/slices/credentials.slice';
 import { showErrorMessage, showSuccessMessage } from '../../messages/slices/message.slice';
 import { RootState } from '../../store/default.store';
 import { ConfigState } from '../../store/slices/config.slice';
@@ -37,10 +38,12 @@ const RegisterMfa = () => {
       await RegisterMfaAction(tenantState, registerState, configState);
 
       dispatch(updateLoginUserId(registerState.userId));
-
+      dispatch(updateState({ registrationDone: true }));
+      dispatch(hasNew());
       dispatch(hideRegisterMfaModal());
       dispatch(showSuccessMessage('MFA registration successful'));
     } catch (err: any) {
+      dispatch(updateState({ registrationDone: false }));
       dispatch(hideRegisterMfaModal());
       dispatch(showErrorMessage(err.message));
     }

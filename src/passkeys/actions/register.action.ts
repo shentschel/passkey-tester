@@ -49,6 +49,7 @@ export const RegisterPasskeyAction = async (
 
     return response.data;
   } catch (err: any) {
+    console.error(err);
     throw new Error(ErrorHelper.CreateErrorResponse(err));
   }
 };

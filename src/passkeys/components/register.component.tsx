@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { hasNew } from '../../credentials/slices/credentials.slice';
 import { showErrorMessage, showSuccessMessage } from '../../messages/slices/message.slice';
 import { RootState } from '../../store/default.store';
 import { ConfigState } from '../../store/slices/config.slice';
@@ -37,12 +38,14 @@ const RegisterPasskey = () => {
     try {
       await RegisterPasskeyAction(tenantState, registerState, configState);
 
+      dispatch(updateState({ registrationDone: true }));
       dispatch(updateLoginUserId(registerState.userId));
       dispatch(updateTransactionUserId(registerState.userId));
-
+      dispatch(hasNew());
       dispatch(hideRegisterPasskeyModal());
       dispatch(showSuccessMessage('Passkey registration successful'));
     } catch (err: any) {
+      dispatch(updateState({ registrationDone: false }));
       dispatch(hideRegisterPasskeyModal());
       dispatch(showErrorMessage(err.message));
     }

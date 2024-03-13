@@ -9,6 +9,7 @@ export type RegisterMfaState = {
   userName: string;
   displayName?: string;
   icon?: string;
+  registrationDone: boolean;
 };
 
 const initialState: RegisterMfaState = {
@@ -17,6 +18,7 @@ const initialState: RegisterMfaState = {
   userName: 'sjacobi',
   displayName: 'Stefan Jacobi',
   icon: undefined,
+  registrationDone: false,
 };
 
 export const RegisterMfaSlice = createSlice({

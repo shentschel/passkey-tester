@@ -10,6 +10,7 @@ import LoginPasskeyReducer from '../passkeys/slices/login-passkey.slice';
 import TransactionPasskeyReducer from '../passkeys/slices/transaction-passkey.slice';
 import RegisterMfaReducer from '../mfa/slices/register-mfa.slice';
 import LoginMfaReducer from '../mfa/slices/login-mfa.slice';
+import CredentialReducer from '../credentials/slices/credentials.slice';
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     transactionPasskey: TransactionPasskeyReducer,
     registerMfa: RegisterMfaReducer,
     loginMfa: LoginMfaReducer,
+    credentials: CredentialReducer,
   },
 });
 

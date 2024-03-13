@@ -5,6 +5,7 @@ import React from 'react';
 
 import { ButtonGroup, Col, Container, Row } from 'react-bootstrap';
 import './App.css';
+import CredentialView from './credentials/components/view.component';
 import Message from './messages/components/view.component';
 import LoginMfa from './mfa/components/login.component';
 import RegisterMfa from './mfa/components/register.component';
@@ -12,6 +13,7 @@ import LoginPasskey from './passkeys/components/login.component';
 import RegisterPasskey from './passkeys/components/register.component';
 import TransactionPasskey from './passkeys/components/transaction.component';
 import TenantView from './tenants/components/view.component';
+import PasskeyTesterComponent from './v2/passkey-tester';
 
 const App = () => {
   return (
@@ -19,7 +21,7 @@ const App = () => {
       <Container className="app">
         <Row>
           <Col></Col>
-          <Col>
+          <Col className="justify-content-center">
             <h1>Passkey API Tester</h1>
           </Col>
           <Col></Col>
@@ -68,10 +70,15 @@ const App = () => {
         </Row>
 
         <Row>
-          <Col className="d-grid gap-2" sm={6}>
+          <Col sm={6}>
             <h4 className={'h4'}>Result</h4>
 
             <Message />
+          </Col>
+          <Col className="d-grid gap-2" sm={6}>
+            <h4 className={'h4'}>Credentials</h4>
+
+            <CredentialView />
           </Col>
         </Row>
       </Container>

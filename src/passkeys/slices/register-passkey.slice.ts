@@ -9,6 +9,7 @@ export type RegisterPasskeyState = {
   userName: string;
   displayName?: string;
   icon?: string;
+  registrationDone: boolean;
 };
 
 const initialState: RegisterPasskeyState = {
@@ -17,6 +18,7 @@ const initialState: RegisterPasskeyState = {
   userName: 'sjacobi',
   displayName: 'Stefan Jacobi',
   icon: undefined,
+  registrationDone: false,
 };
 
 export const RegisterPasskeySlice = createSlice({
