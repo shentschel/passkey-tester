@@ -1,5 +1,6 @@
 /** @format */
 import { ApiError } from '../types/error.type';
+import { Alert } from '../types/passkey-tester.types';
 
 export default class ErrorHelper {
   static CreateErrorResponse(error: any): string {
@@ -18,5 +19,13 @@ export default class ErrorHelper {
       // Something happened in setting up the request that triggered an Error
       return error.message;
     }
+  }
+
+  static ShowErrorAlert(err: any, showAlert: (alert: Alert) => void): void {
+    showAlert({
+      show: true,
+      type: 'danger',
+      message: ErrorHelper.CreateErrorResponse(err),
+    });
   }
 }
