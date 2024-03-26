@@ -7,6 +7,7 @@ import './App.css';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import * as UUID from 'uuid';
 import { DeleteCredentialsAction } from './actions/delete-credentials.action';
+import { DeleteTenantAction } from './actions/delete-tenant.action';
 import { GetCredentialsAction } from './actions/get-credentials.action';
 import ApiSection from './components/sections/api.section';
 import CredentialSection from './components/sections/credential.section';
@@ -67,9 +68,35 @@ const App = () => {
   };
 
   const deleteCredential = async (credId: string) => {
-    await DeleteCredentialsAction(tenant, api.public, userId, credId);
+    try {
+      await DeleteCredentialsAction(tenant, api.public, userId, credId);
 
-    setCredentials(credentials.filter((cred) => cred.id !== credId));
+      setCredentials(credentials.filter((cred) => cred.id !== credId));
+
+      setAlert({
+        show: true,
+        message: 'Credential removal was successful',
+        type: 'success',
+      });
+    } catch (err) {
+      ErrorHelper.ShowErrorAlert(err, setAlert);
+    }
+  };
+
+  const deleteTenant = async () => {
+    try {
+      await DeleteTenantAction(tenant, api.admin);
+
+      setTenant(rootState.tenant);
+
+      setAlert({
+        show: true,
+        message: 'Tenant removal was successful',
+        type: 'success',
+      });
+    } catch (err) {
+      ErrorHelper.ShowErrorAlert(err, setAlert);
+    }
   };
 
   return (
@@ -91,7 +118,7 @@ const App = () => {
             </Button>
           </Col>
           <Col className="d-grid gap-2" sm={6}>
-            <TenantSection tenant={tenant} api={api} onChange={setTenant} onAlert={setAlert} />
+            <TenantSection tenant={tenant} api={api} onChange={setTenant} onAlert={setAlert} onDelete={deleteTenant} />
           </Col>
         </Row>
 
